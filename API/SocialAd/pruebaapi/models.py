@@ -19,10 +19,10 @@ class CapacidadComercio(models.Model):
 
 class Cita(models.Model):
     id_cita = models.IntegerField(primary_key=True)
-    id_comercio = models.ForeignKey('Comercio', models.DO_NOTHING, db_column='id_comercio')
-    id_horario = models.ForeignKey('Horario', models.DO_NOTHING, db_column='id_horario')
-    id_cliente = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='id_cliente')
-    id_estado_cita = models.ForeignKey('EstadoCita', models.DO_NOTHING, db_column='id_estado_cita')
+    id_comercio = models.ForeignKey('Comercio', on_delete=models.CASCADE, db_column='id_comercio')
+    id_horario = models.ForeignKey('Horario', on_delete=models.CASCADE, db_column='id_horario')
+    id_cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE, db_column='id_cliente')
+    id_estado_cita = models.ForeignKey('EstadoCita', on_delete=models.CASCADE, db_column='id_estado_cita')
 
     class Meta:
         db_table = 'cita'
@@ -33,15 +33,15 @@ class Cliente(models.Model):
     contrasenia_cliente = models.CharField(max_length=100)
     telefono_cliente = models.CharField(max_length=9, blank=True, null=True)
     correoelectronico_cliente = models.CharField(max_length=100)
-    id_municipio = models.ForeignKey('Municipio', models.DO_NOTHING, db_column='id_municipio')
+    id_municipio = models.ForeignKey('Municipio', on_delete=models.CASCADE, db_column='id_municipio')
 
     class Meta:
         db_table = 'cliente'
 
 
 class ClienteXCola(models.Model):
-    id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
-    id_cola = models.ForeignKey('Cola', models.DO_NOTHING, db_column='id_cola')
+    id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='id_cliente')
+    id_cola = models.ForeignKey('Cola', on_delete=models.CASCADE, db_column='id_cola')
 
     class Meta:
         db_table = 'cliente_x_cola'
@@ -50,9 +50,9 @@ class ClienteXCola(models.Model):
 class Cola(models.Model):
     id_cola = models.IntegerField(primary_key=True)
     tiempo_esperado = models.DateTimeField()
-    id_comercio = models.ForeignKey('Comercio', models.DO_NOTHING, db_column='id_comercio')
-    id_tipo_cola = models.ForeignKey('TipoCola', models.DO_NOTHING, db_column='id_tipo_cola')
-    id_tipo_servicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='id_tipo_servicio')
+    id_comercio = models.ForeignKey('Comercio', on_delete=models.CASCADE, db_column='id_comercio')
+    id_tipo_cola = models.ForeignKey('TipoCola', on_delete=models.CASCADE, db_column='id_tipo_cola')
+    id_tipo_servicio = models.ForeignKey('TipoServicio', on_delete=models.CASCADE, db_column='id_tipo_servicio')
 
     class Meta:
         db_table = 'cola'
@@ -67,10 +67,10 @@ class Comercio(models.Model):
     messenger_comercio = models.CharField(max_length=100, blank=True, null=True)
     sitioweb_comercio = models.CharField(max_length=100, blank=True, null=True)
     descripcion_comercio = models.CharField(max_length=500, blank=True, null=True)
-    id_tipocomercio = models.ForeignKey('TipoComercio', models.DO_NOTHING, db_column='id_tipocomercio', blank=True,
+    id_tipocomercio = models.ForeignKey('TipoComercio', on_delete=models.CASCADE, db_column='id_tipocomercio', blank=True,
                                         null=True)
-    id_municipio = models.ForeignKey('Municipio', models.DO_NOTHING, db_column='id_municipio', blank=True, null=True)
-    id_capacidad = models.ForeignKey(CapacidadComercio, models.DO_NOTHING, db_column='id_capacidad', blank=True,
+    id_municipio = models.ForeignKey('Municipio', on_delete=models.CASCADE, db_column='id_municipio', blank=True, null=True)
+    id_capacidad = models.ForeignKey(CapacidadComercio, on_delete=models.CASCADE, db_column='id_capacidad', blank=True,
                                      null=True)
 
     class Meta:
@@ -78,16 +78,16 @@ class Comercio(models.Model):
 
 
 class ComercioXNormativa(models.Model):
-    id_normativa = models.ForeignKey('Normativa', models.DO_NOTHING, db_column='id_normativa')
-    id_comercio = models.ForeignKey(Comercio, models.DO_NOTHING, db_column='id_comercio')
+    id_normativa = models.ForeignKey('Normativa', on_delete=models.CASCADE, db_column='id_normativa')
+    id_comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE, db_column='id_comercio')
 
     class Meta:
         db_table = 'comercio_x_normativa'
 
 
 class ComercioXTiposervicio(models.Model):
-    id_comercio = models.ForeignKey(Comercio, models.DO_NOTHING, db_column='id_comercio')
-    id_tiposervicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='id_tiposervicio')
+    id_comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE, db_column='id_comercio')
+    id_tiposervicio = models.ForeignKey('TipoServicio', on_delete=models.CASCADE, db_column='id_tiposervicio')
 
     class Meta:
         db_table = 'comercio_x_tiposervicio'
@@ -122,8 +122,8 @@ class Horario(models.Model):
 
 
 class HorarioXComercio(models.Model):
-    id_horario = models.ForeignKey(Horario, models.DO_NOTHING, db_column='id_horario')
-    id_comercio = models.ForeignKey(Comercio, models.DO_NOTHING, db_column='id_comercio')
+    id_horario = models.ForeignKey(Horario, on_delete=models.CASCADE, db_column='id_horario')
+    id_comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE, db_column='id_comercio')
 
     class Meta:
         db_table = 'horario_x_comercio'
@@ -132,7 +132,7 @@ class HorarioXComercio(models.Model):
 class Municipio(models.Model):
     id_municipio = models.IntegerField(primary_key=True)
     nombre_municipio = models.CharField(max_length=100)
-    id_departamento = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='id_departamento')
+    id_departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE, db_column='id_departamento')
 
     class Meta:
         db_table = 'municipio'
@@ -142,7 +142,7 @@ class Normativa(models.Model):
     id_normativa = models.IntegerField(primary_key=True)
     descripcion_normativa = models.CharField(max_length=500)
     adjunto_normativa = models.CharField(max_length=200)
-    id_tipo_normativa = models.ForeignKey('TipoNormativa', models.DO_NOTHING, db_column='id_tipo_normativa')
+    id_tipo_normativa = models.ForeignKey('TipoNormativa', on_delete=models.CASCADE, db_column='id_tipo_normativa')
     fecha_de_publicacion_normativa = models.DateField()
 
     class Meta:
