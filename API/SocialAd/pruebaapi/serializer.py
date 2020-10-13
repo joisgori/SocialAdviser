@@ -53,7 +53,7 @@ class CitaSerializer(serializers.ModelSerializer):
                   'id_cliente',
                   'id_estado_cita'
                   ]
-        # depth = 1
+        depth = 1
 
 
 class ClienteXColaSerializer(serializers.ModelSerializer):
@@ -61,7 +61,7 @@ class ClienteXColaSerializer(serializers.ModelSerializer):
         model = ClienteXCola
         fields = ['id_cliente', 'id_cola']
 
-        # depth = 1
+        depth = 1
 
 
 class ColaSerializer(serializers.ModelSerializer):
@@ -69,7 +69,7 @@ class ColaSerializer(serializers.ModelSerializer):
         model = Cola
         fields = ['id_cola','tiempo_esperado', 'id_comercio', 'id_tipo_cola', 'id_tipo_servicio']
 
-        #depth = 1
+        depth = 1
 
 
 class ComercioXNormativaSerializer(serializers.ModelSerializer):
@@ -77,15 +77,15 @@ class ComercioXNormativaSerializer(serializers.ModelSerializer):
         model = ComercioXNormativa
         fields = ['id_normativa', 'id_comercio']
 
-        #depth = 1
+        depth = 1
 
 
-class ComercioXTiposervicioSerializer(serializers.ModelSerializer):
+class ComercioXTipoServicioSerializer(serializers.ModelSerializer):
     class Meta:
         model = ComercioXTiposervicio
         fields = ['id_comercio', 'id_tiposervicio']
 
-        #depth = 1
+        depth = 1
 
 
 class DepartamentoSerializer(serializers.ModelSerializer):
@@ -101,7 +101,7 @@ class EstadoCitaSerializer(serializers.ModelSerializer):
         model = EstadoCita
         fields = ['id_estado_cita', 'nombre_estado', 'valor_estado']
 
-        #depth = 1
+        depth = 1
 
 
 class HorarioSerializer(serializers.ModelSerializer):
@@ -109,7 +109,7 @@ class HorarioSerializer(serializers.ModelSerializer):
         model = Horario
         fields = ['id_horario', 'hora_inicio', 'hora_final', 'fecha_inicio', 'fecha_final']
 
-        #depth = 1
+        depth = 1
 
 
 class HorarioXComercioSerializer(serializers.ModelSerializer):
@@ -117,7 +117,7 @@ class HorarioXComercioSerializer(serializers.ModelSerializer):
         model = HorarioXComercio
         fields = ['id_horario', 'id_comercio']
 
-        #depth = 1
+        depth = 1
 
 
 class MunicipioSerializer(serializers.ModelSerializer):
@@ -125,7 +125,7 @@ class MunicipioSerializer(serializers.ModelSerializer):
         model = Municipio
         fields = ['id_municipio', 'nombre_municipio', 'id_departamento']
 
-        #depth = 1
+        depth = 1
 
 
 class NormativaSerializer(serializers.ModelSerializer):
@@ -133,7 +133,7 @@ class NormativaSerializer(serializers.ModelSerializer):
         model = Normativa
         fields = ['id_normativa', 'descripcion_normativa', 'adjunto_normativa', 'id_tipo_normativa', 'fecha_de_publicacion_normativa']
 
-        #depth = 1
+        depth = 1
 
 
 class TipoColaSerializer(serializers.ModelSerializer):
