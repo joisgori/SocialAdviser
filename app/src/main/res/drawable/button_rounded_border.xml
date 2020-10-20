@@ -3,5 +3,5 @@
     <corners android:radius="16dp"/>
     <stroke
         android:width="2dp"
-        android:color="@color/cardview_dark_background"/>
+        android:color="@color/secondaryDarkColor"/>
 </shape>
