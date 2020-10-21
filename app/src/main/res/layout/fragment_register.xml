@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.register">
+    tools:context=".fragments_login.RegisterFragment">
 
     <TextView
         android:id="@+id/nameLabel"
@@ -46,7 +46,7 @@
         tools:layout_editor_absoluteY="348dp" />
 
     <Button
-        android:id="@+id/validationRegist"
+        android:id="@+id/Button_Accept_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aceptar"
@@ -55,7 +55,7 @@
         tools:layout_editor_absoluteY="497dp" />
 
     <Button
-        android:id="@+id/cancelButton"
+        android:id="@+id/Button_Cancel_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancelar"

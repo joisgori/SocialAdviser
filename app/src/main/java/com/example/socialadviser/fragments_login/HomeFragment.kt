@@ -1,4 +1,4 @@
-package com.example.socialadviser.fragments
+package com.example.socialadviser.fragments_login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,12 +19,10 @@ class home : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        view.login.setOnClickListener {
+        view.Button_Home_Login.setOnClickListener {
             this.findNavController().navigate(
                 homeDirections.openRegisterAction()
             )
-
-            //this.findNavController().navigateUp()
         }
 
         return view
