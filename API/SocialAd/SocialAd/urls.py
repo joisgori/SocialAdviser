@@ -38,6 +38,7 @@ router.register(r'tipocola', views.TipoColaSet)
 router.register(r'tipocomercio', views.TipoComercioSet)
 router.register(r'tiponormativa', views.TipoNormativaSet)
 router.register(r'tiposervicio', views.TipoServicioSet)
+router.register(r'clientes',views.ClienteViewSet)
 
 urlpatterns = [
     path('',include(router.urls)),

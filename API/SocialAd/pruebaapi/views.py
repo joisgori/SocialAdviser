@@ -4,6 +4,9 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .serializer import *
 from .models import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
@@ -143,3 +146,9 @@ class TipoServicioSet(viewsets.ModelViewSet):
     queryset = TipoServicio.objects.all()
     serializer_class = TipoServicioSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ClienteViewSet(viewsets.ModelViewSet):
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerialiazer
+    permission_classes = [permissions.AllowAny]

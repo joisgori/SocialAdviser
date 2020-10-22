@@ -36,11 +36,11 @@ class Cita(models.Model):
 
 
 class Cliente(models.Model):
-    id_cliente = models.IntegerField(primary_key=True)
+    id_cliente = models.AutoField(primary_key=True)
     contrasenia_cliente = models.CharField(max_length=100)
     telefono_cliente = models.CharField(max_length=9, blank=True, null=True)
     correoelectronico_cliente = models.CharField(max_length=100)
-    id_municipio = models.ForeignKey('Municipio', on_delete=models.CASCADE, db_column='id_municipio')
+    id_municipio = models.ForeignKey('Municipio', on_delete=models.CASCADE, db_column='id_municipio', blank=True)
     nombre_cliente = models.CharField(max_length=200, blank=True, default="")
     apellido_cliente = models.CharField(max_length=200, blank=True, default="")
 

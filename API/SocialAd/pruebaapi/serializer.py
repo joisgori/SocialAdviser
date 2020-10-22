@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-#from .models import Comercio, CapacidadComercio, Cita, ClienteXCola, Cola, ComercioXNormativa, ComercioXTiposervicio, Departamento, EstadoCita, Horario, HorarioXComercio, Municipio, Normativa
+# from .models import Comercio, CapacidadComercio, Cita, ClienteXCola, Cola, ComercioXNormativa, ComercioXTiposervicio, Departamento, EstadoCita, Horario, HorarioXComercio, Municipio, Normativa
 
 from .models import *
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -67,7 +69,7 @@ class ClienteXColaSerializer(serializers.ModelSerializer):
 class ColaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cola
-        fields = ['id_cola','tiempo_esperado', 'id_comercio', 'id_tipo_cola', 'id_tipo_servicio']
+        fields = ['id_cola', 'tiempo_esperado', 'id_comercio', 'id_tipo_cola', 'id_tipo_servicio']
 
         depth = 1
 
@@ -93,7 +95,7 @@ class DepartamentoSerializer(serializers.ModelSerializer):
         model = Departamento
         fields = ['id_departamento', 'nombre_departamento']
 
-        #depth = 1
+        # depth = 1
 
 
 class EstadoCitaSerializer(serializers.ModelSerializer):
@@ -131,7 +133,8 @@ class MunicipioSerializer(serializers.ModelSerializer):
 class NormativaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Normativa
-        fields = ['id_normativa', 'descripcion_normativa', 'adjunto_normativa', 'id_tipo_normativa', 'fecha_de_publicacion_normativa']
+        fields = ['id_normativa', 'descripcion_normativa', 'adjunto_normativa', 'id_tipo_normativa',
+                  'fecha_de_publicacion_normativa']
 
         depth = 1
 
@@ -141,7 +144,7 @@ class TipoColaSerializer(serializers.ModelSerializer):
         model = TipoCola
         fields = ['id_tipo_cola', 'nombre_tipo_cola', 'valor_tipo_cola']
 
-        #depth = 1
+        # depth = 1
 
 
 class TipoComercioSerializer(serializers.ModelSerializer):
@@ -149,7 +152,7 @@ class TipoComercioSerializer(serializers.ModelSerializer):
         model = TipoComercio
         fields = ['id_tipo_comercio', 'nombre_tipo_comercio']
 
-        #depth = 1
+        # depth = 1
 
 
 class TipoNormativaSerializer(serializers.ModelSerializer):
@@ -166,3 +169,24 @@ class TipoServicioSerializer(serializers.ModelSerializer):
         fields = ['id_tipo_servicio', 'nombre_tipo_servicio']
 
         # depth = 1
+
+
+class ClienteSerialiazer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        fields = ['contrasenia_cliente','telefono_cliente','correoelectronico_cliente','id_municipio','nombre_cliente', 'apellido_cliente']
+        write_only_fields = ('password',)
+        read_only_fields = ('id',)
+        depth = 1
+
+    def create(self, validated_data):
+        cliente = Cliente.objects.create(
+            contrasenia_cliente=validated_data['contrasenia_cliente'],
+            telefono_cliente=validated_data['telefono_cliente'],
+            correoelectronico_cliente=validated_data['correoelectronico_cliente'],
+            id_municipio=validated_data['id_municipio'],
+            nombre_cliente=validated_data['nombre_cliente'],
+            apellido_cliente=validated_data['apellido_cliente']
+        )
+        cliente.save()
+        return cliente

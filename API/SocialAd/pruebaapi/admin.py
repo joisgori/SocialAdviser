@@ -5,7 +5,7 @@ from .models import Comercio, Departamento, Municipio, Cliente, Cita, Cola, Tipo
 # Register your models here.
 
 class ClienteAdmin(admin.ModelAdmin):
-    fields = ['correoelectronico_cliente', 'telefono_cliente', 'id_municipio']
+    fields = ['correoelectronico_cliente', 'telefono_cliente', 'id_municipio','nombre_cliente','apellido_cliente']
 
 
 class ComercioAdmin(admin.ModelAdmin):
