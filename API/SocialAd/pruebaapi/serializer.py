@@ -174,19 +174,6 @@ class TipoServicioSerializer(serializers.ModelSerializer):
 class ClienteSerialiazer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['contrasenia_cliente','telefono_cliente','correoelectronico_cliente','id_municipio','nombre_cliente', 'apellido_cliente']
+        fields = ['id_cliente','contrasenia_cliente','telefono_cliente','correoelectronico_cliente','id_municipio','nombre_cliente', 'apellido_cliente']
         write_only_fields = ('password',)
-        read_only_fields = ('id',)
         depth = 1
-
-    def create(self, validated_data):
-        cliente = Cliente.objects.create(
-            contrasenia_cliente=validated_data['contrasenia_cliente'],
-            telefono_cliente=validated_data['telefono_cliente'],
-            correoelectronico_cliente=validated_data['correoelectronico_cliente'],
-            id_municipio=validated_data['id_municipio'],
-            nombre_cliente=validated_data['nombre_cliente'],
-            apellido_cliente=validated_data['apellido_cliente']
-        )
-        cliente.save()
-        return cliente
