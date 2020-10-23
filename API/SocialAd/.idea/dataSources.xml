@@ -13,5 +13,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/socialadvisor</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="d9qvlu3cvh4ojq@ec2-3-95-87-221.compute-1.amazonaws.com" uuid="6f085c79-e9c2-4828-b19e-826b91f08f8a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-3-95-87-221.compute-1.amazonaws.com:5432/d9qvlu3cvh4ojq</jdbc-url>
+    </data-source>
   </component>
 </project>

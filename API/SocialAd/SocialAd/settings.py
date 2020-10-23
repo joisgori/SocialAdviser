@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +25,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'xu97sqtq4djil&(m7(4wie1as+*%2lk%-pni4v-kikas+1q)u='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['/pruebaapi']
 
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
 
 # Application definition
 
@@ -56,7 +62,7 @@ ROOT_URLCONF = 'SocialAd.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR , 'templates'],
+        'DIRS': [BASE_DIR , '/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,10 +84,10 @@ WSGI_APPLICATION = 'SocialAd.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'socialadvisor',
-        'USER': 'socialad',
-        'PASSWORD': 'PP2Social',
-        'HOST': 'localhost',
+        'NAME': 'd9qvlu3cvh4ojq',
+        'USER': 'qgbandyuykzaem',
+        'PASSWORD': 'e6045f8601cf85d39fef276636404dfaabe925ae299901611987a417922ce47d',
+        'HOST': 'ec2-3-95-87-221.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -129,3 +135,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
+STATIC_URL = '/admin/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django_heroku.settings(locals())
