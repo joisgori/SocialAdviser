@@ -8,6 +8,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.example.socialadviser"
         minSdkVersion 16
@@ -50,5 +55,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:converter-moshi:2.6.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
 }
