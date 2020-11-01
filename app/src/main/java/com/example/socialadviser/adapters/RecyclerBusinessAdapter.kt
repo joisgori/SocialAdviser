@@ -6,43 +6,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialadviser.R
+import com.example.socialadviser.models.Comercios
+import kotlinx.android.synthetic.main.card_bussiness.view.*
 
 class RecyclerBusinessAdapter : RecyclerView.Adapter<RecyclerBusinessAdapter.ViewBHolder>() {
 
-
-     private val kode = arrayOf("d116df5",
-        "36ffc75", "f5cfe78", "5b87628",
-        "db8d14e", "9913dc4", "e120f96",
-        "466251b")
-
-    private val kategori = arrayOf("Kekayaan", "Teknologi",
-        "Keluarga", "Bisnis",
-        "Keluarga", "Hutang",
-        "Teknologi", "Pidana")
-
-    private val isi = arrayOf("pertanyaan 9",
-        "pertanyaan 11", "pertanyaan 17", "test forum",
-        "pertanyaan 12", "pertanyaan 18", "pertanyaan 20",
-        "pertanyaan 21")
+    private var items = emptyList<Comercios>()
 
 
     inner class ViewBHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind (item: Comercios) = with(itemView){
+            textview_card_business_title.text = item.nombre
+            textview_card_business_description.text = item.descripcion
+            textview_card_business_subtitle.text = item.facebook
 
-        var itemKode: TextView
-        var itemKategori: TextView
-        var itemIsi: TextView
-
-        init {
-            itemKode = itemView.findViewById(R.id.textview_card_business_title)
-            itemKategori = itemView.findViewById(R.id.textview_card_business_subtitle)
-            itemIsi = itemView.findViewById(R.id.textview_card_business_description)
-
-            itemView.setOnClickListener {
-                var position: Int = getAdapterPosition()
-                val context = itemView.context
-
-                //Toast.makeText(requireContext(), "El usuario o la contraseña es incorrecta", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
@@ -54,16 +31,16 @@ class RecyclerBusinessAdapter : RecyclerView.Adapter<RecyclerBusinessAdapter.Vie
     }
 
     override fun onBindViewHolder(viewHolder: ViewBHolder, i: Int) {
-        viewHolder.itemKode.text = kode[i]
-        viewHolder.itemKategori.text = kategori[i]
-        viewHolder.itemIsi.text = isi[i]
-
+        viewHolder.bind(items[i])
     }
 
     override fun getItemCount(): Int {
-        return kode.size
+        return items.size
     }
 
-
+    internal fun changeDataSet(newDataSet : List<Comercios>){
+        this.items = newDataSet
+        notifyDataSetChanged()
+    }
 
 }

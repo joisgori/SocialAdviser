@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.fragment_bussines.*
 
 class bussinesFragment : Fragment() {
 
+    lateinit var adapter : RecyclerBusinessAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
