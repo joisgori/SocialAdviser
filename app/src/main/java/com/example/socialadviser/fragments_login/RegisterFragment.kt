@@ -9,17 +9,21 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.socialadviser.AppLogic
+import com.example.socialadviser.BuildConfig
 import com.example.socialadviser.R
 import com.example.socialadviser.interfaces.SocialAdviserApi
 import com.example.socialadviser.models.Cliente
 import com.example.socialadviser.models.results.ClienteResponse
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 class RegisterFragment : Fragment() {
     override fun onCreateView(
@@ -38,8 +42,20 @@ class RegisterFragment : Fragment() {
         val intent = Intent(requireContext(), AppLogic::class.java)
 
         view.Button_Accept_Register.setOnClickListener{
+
+            val logging = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
+
+            val okhttp = OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS).apply {
+                    if (BuildConfig.DEBUG) {
+                        addInterceptor(logging)
+                    }
+                }
+
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://socialadvisor.herokuapp.com/")
+                .client(okhttp.build())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
 

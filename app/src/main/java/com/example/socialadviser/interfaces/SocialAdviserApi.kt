@@ -17,6 +17,6 @@ interface SocialAdviserApi {
     fun login(@Path("mail") mail:String, @Path("pass") pass:String) :  Call<ResponseBody>
 
     @Headers("Content-Type: application/json", "Accept: application/json")
-    @POST("clientes")
+    @POST("clientes/")
     fun addUser(@Body cliente:Cliente) : Call<ClienteResponse>
 }
