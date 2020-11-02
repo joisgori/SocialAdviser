@@ -1,5 +1,7 @@
 package com.example.socialadviser.interfaces
 
+import com.example.socialadviser.models.Cliente
+import com.example.socialadviser.models.results.ClienteResponse
 import com.example.socialadviser.models.results.ComercioResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -13,4 +15,8 @@ interface SocialAdviserApi {
 
     @GET("onecliente/correo={mail}&contra={pass}")
     fun login(@Path("mail") mail:String, @Path("pass") pass:String) :  Call<ResponseBody>
+
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @POST("clientes")
+    fun addUser(@Body cliente:Cliente) : Call<ClienteResponse>
 }
