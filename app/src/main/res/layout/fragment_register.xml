@@ -11,67 +11,49 @@
         android:textSize="25dp"
         android:textStyle="bold"
         android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/fstTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"
-        android:text="Nombre"/>
     <EditText
         android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:hint="Nombre"
         android:ems="10"/>
-    <TextView
-        android:id="@+id/ape"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apellido"
-        android:layout_marginLeft="100dp" />
+
     <EditText
         android:id="@+id/apellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:hint="Apellido"
         android:ems="10" />
-    <TextView
-        android:id="@+id/secTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Correo"
-        android:layout_marginLeft="100dp" />
     <EditText
         android:id="@+id/correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:hint="Correo"
         android:ems="10" />
-    <TextView
-        android:id="@+id/thirdTxt"
+    <Spinner
+        android:id="@+id/municipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contraseña"
-        android:layout_marginLeft="100dp" />
+        android:layout_marginLeft="100dp">
+
+    </Spinner>
     <EditText
         android:id="@+id/contraseña"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:inputType="textPassword"
+        android:hint="Contraseña"
         android:ems="10" />
-    <TextView
-        android:id="@+id/num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Numero"
-        android:layout_marginLeft="100dp" />
     <EditText
         android:id="@+id/numero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:hint="Numero"
         android:ems="10" />
     <Button
         android:id="@+id/Button_Accept_Register"
