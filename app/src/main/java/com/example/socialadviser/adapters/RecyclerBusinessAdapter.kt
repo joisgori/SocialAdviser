@@ -9,9 +9,8 @@ import com.example.socialadviser.R
 import com.example.socialadviser.models.Comercios
 import kotlinx.android.synthetic.main.card_bussiness.view.*
 
-class RecyclerBusinessAdapter : RecyclerView.Adapter<RecyclerBusinessAdapter.ViewBHolder>() {
+class RecyclerBusinessAdapter(private var comercios:List<Comercios>) : RecyclerView.Adapter<RecyclerBusinessAdapter.ViewBHolder>() {
 
-    private var items = emptyList<Comercios>()
 
 
     inner class ViewBHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,15 +30,15 @@ class RecyclerBusinessAdapter : RecyclerView.Adapter<RecyclerBusinessAdapter.Vie
     }
 
     override fun onBindViewHolder(viewHolder: ViewBHolder, i: Int) {
-        viewHolder.bind(items[i])
+        viewHolder.bind(comercios[i])
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return comercios.size
     }
 
     internal fun changeDataSet(newDataSet : List<Comercios>){
-        this.items = newDataSet
+        this.comercios = newDataSet
         notifyDataSetChanged()
     }
 
