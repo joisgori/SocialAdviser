@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.socialadviser.AppLogic
 import com.example.socialadviser.R
 import com.example.socialadviser.interfaces.SocialAdviserApi
+import com.example.socialadviser.models.Cliente2
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import okhttp3.ResponseBody
@@ -49,15 +50,15 @@ class HomeFragment : Fragment() {
 
             val call = service.login(editTextTextEmailAddress.text.toString(), editTextTextPassword.text.toString())
 
-
-
-            call.enqueue(object : Callback<ResponseBody>{
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            call.enqueue(object : Callback<Cliente2>{
+                override fun onFailure(call: Call<Cliente2>, t: Throwable) {
                     Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                override fun onResponse(call: Call<Cliente2>, response: Response<Cliente2>) {
                     if(response.code() == 200){
+                        intent.putExtra("mail", editTextTextEmailAddress.text.toString())
+                        intent.putExtra("contra", editTextTextEmailAddress.text.toString())
                         startActivity(intent)
                     } else{
                         Toast.makeText(requireContext(), "Credenciales Invalidas", Toast.LENGTH_SHORT).show()

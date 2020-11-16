@@ -25,7 +25,21 @@
     </fragment>
     <fragment
         android:id="@+id/bussinesFragment"
-        android:name="com.example.socialadviser.fragments_logic.bussinesFragment"
+        android:name="com.example.socialadviser.fragments_logic.BussinesFragment"
         android:label="fragment_bussines"
-        tools:layout="@layout/fragment_bussines" />
+        tools:layout="@layout/fragment_bussines" >
+        <action
+            android:id="@+id/actionToSummary"
+            app:destination="@id/summaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.example.socialadviser.fragments_logic.SummaryFragment"
+        android:label="summary_fragment"
+        tools:layout="@layout/fragment_summary">
+        <action
+            android:id="@+id/actionToMeetings"
+            app:destination="@id/meetingFragment2" />
+    </fragment>
+
 </navigation>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.socialadviser.BuildConfig
 import com.example.socialadviser.R
@@ -13,6 +14,7 @@ import com.example.socialadviser.interfaces.SocialAdviserApi
 import com.example.socialadviser.models.Comercios
 import com.example.socialadviser.models.results.ComercioResponse
 import kotlinx.android.synthetic.main.fragment_bussines.*
+import kotlinx.android.synthetic.main.fragment_bussines.view.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -23,7 +25,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class bussinesFragment : Fragment() {
+class BussinesFragment : Fragment() {
 
     lateinit var adapter : RecyclerBusinessAdapter
 
@@ -32,7 +34,7 @@ class bussinesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_bussines, container, false)
+        val view = inflater.inflate(R.layout.fragment_bussines, container, false)
 
 
         val logging = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
@@ -76,12 +78,20 @@ class bussinesFragment : Fragment() {
                     layoutManager = LinearLayoutManager(activity)
                     adapter = RecyclerBusinessAdapter(come)
                 }
+
             }
 
             override fun onFailure(call: Call<ComercioResponse>, t: Throwable) {
             }
 
         })
+
+        view.floatingActionButtonSummary.setOnClickListener {
+                this.findNavController().navigate(
+                    BussinesFragmentDirections.actionToSummary()
+                )
+
+        }
 
         return view
     }

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textview_card_title"
+                android:id="@+id/comercio"
                 android:layout_width="181dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="16dp"
@@ -34,16 +34,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="68dp" />
 
-            <TextView
-                android:id="@+id/textview_card_subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="subtítulo"
-                android:gravity="end|center_vertical"
-                android:layout_marginRight="16dp" />
 
         </LinearLayout>
         <LinearLayout
@@ -51,7 +41,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textview_card_description"
+                android:id="@+id/hora"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="16dp"
@@ -59,7 +49,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="top"
-                android:text="puras mamadas" />
+                android:text="Hora" />
 
         </LinearLayout>
 

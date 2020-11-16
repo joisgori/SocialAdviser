@@ -3,45 +3,17 @@ package com.example.socialadviser.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialadviser.R
+import com.example.socialadviser.models.Cita
+import kotlinx.android.synthetic.main.card_meetings.view.*
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
-
-    private val kode = arrayOf("d116df5",
-        "36ffc75", "f5cfe78", "5b87628",
-        "db8d14e", "9913dc4", "e120f96",
-        "466251b")
-
-    private val kategori = arrayOf("Kekayaan", "Teknologi",
-        "Keluarga", "Bisnis",
-        "Keluarga", "Hutang",
-        "Teknologi", "Pidana")
-
-    private val isi = arrayOf("pertanyaan 9",
-        "pertanyaan 11", "pertanyaan 17", "test forum",
-        "pertanyaan 12", "pertanyaan 18", "pertanyaan 20",
-        "pertanyaan 21")
+class RecyclerAdapter(private var citas:List<Cita>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        var itemKode: TextView
-        var itemKategori: TextView
-        var itemIsi: TextView
-
-        init {
-            itemKode = itemView.findViewById(R.id.textview_card_title)
-            itemKategori = itemView.findViewById(R.id.textview_card_subtitle)
-            itemIsi = itemView.findViewById(R.id.textview_card_description)
-
-            itemView.setOnClickListener {
-                var position: Int = getAdapterPosition()
-                val context = itemView.context
-
-                //Toast.makeText(requireContext(), "El usuario o la contraseña es incorrecta", Toast.LENGTH_SHORT).show()
-            }
+        fun bind(item: Cita) = with(itemView){
+            comercio.text = item.comercio?.nombre
+            hora.text = item.horario?.fecha_inicio
         }
     }
 
@@ -53,14 +25,17 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        viewHolder.itemKode.text = kode[i]
-        viewHolder.itemKategori.text = kategori[i]
-        viewHolder.itemIsi.text = isi[i]
+        viewHolder.bind(citas[i])
 
     }
 
     override fun getItemCount(): Int {
-        return kode.size
+        return citas.size
+    }
+
+    internal fun changeDataSet(newDataSet : List<Cita>){
+        this.citas = newDataSet
+        notifyDataSetChanged()
     }
 
 
