@@ -74,6 +74,7 @@ class BussinesFragment : Fragment() {
                     }
                 }
 
+
                 recycler_bussiness.apply {
                     layoutManager = LinearLayoutManager(activity)
                     adapter = RecyclerBusinessAdapter(come)

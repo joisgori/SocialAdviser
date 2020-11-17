@@ -86,11 +86,18 @@ class MeetingFragment : Fragment(){
 
                 val cit = citas?.results
 
+                Log.d("Si hay", citas.toString())
+
                 val cita = ArrayList<Cita>()
 
                 if(cit!= null){
                     for(citas in cit){
                         cita.add(citas)
+                    }
+                }
+                if(cit!= null) {
+                    for (citas in cit) {
+                        Log.d("Se guarda", cit.toString())
                     }
                 }
                 Log.d("Citas: ", cita.toString())
