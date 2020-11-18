@@ -1,15 +1,17 @@
 package com.example.socialadviser.models
 
-import com.example.socialadviser.models.results.Comercios2
+
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Cita(
+data class Cita2(
+    @Json(name = "id_cita")
+    val idCita: Int?,
     @Json(name = "id_comercio")
-    val idComercio: Comercios?,
+    val idComercio: IdComercio?,
     @Json(name = "id_horario")
-    val idHorario: Horario?,
+    val idHorario: IdHorario?,
     @Json(name = "id_cliente")
     val idCliente: Cliente2?,
     @Json(name = "id_estado_cita")

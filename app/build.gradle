@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.socialadviser"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -62,5 +62,9 @@ dependencies {
 
     // Logging interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:4.2.0"
+
+    //Moshi
+    implementation "com.squareup.moshi:moshi:1.8.0"
+    implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
 
 }

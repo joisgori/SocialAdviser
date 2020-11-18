@@ -5,15 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.socialadviser.BuildConfig
 import com.example.socialadviser.R
 import com.example.socialadviser.adapters.RecyclerBusinessAdapter
 import com.example.socialadviser.interfaces.SocialAdviserApi
+import com.example.socialadviser.models.Cliente2
 import com.example.socialadviser.models.Comercios
+import com.example.socialadviser.models.Horario
+import com.example.socialadviser.models.IdEstadoCita
 import com.example.socialadviser.models.results.ComercioResponse
-import kotlinx.android.synthetic.main.fragment_bussines.*
+import com.example.socialadviser.models.results.EstadoCitaResponse
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_bussines.view.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,6 +33,9 @@ import java.util.concurrent.TimeUnit
 class BussinesFragment : Fragment() {
 
     lateinit var adapter : RecyclerBusinessAdapter
+    lateinit var horario : Horario
+    lateinit var cliente2: Cliente2
+    lateinit var estadoCita: IdEstadoCita
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +43,13 @@ class BussinesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_bussines, container, false)
+
+        arguments?.let {
+            val safeArgs = BussinesFragmentArgs.fromBundle(it)
+
+            horario = safeArgs.horario
+            cliente2 = safeArgs.cliente
+        }
 
 
         val logging = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
@@ -47,15 +62,37 @@ class BussinesFragment : Fragment() {
                 }
             }
 
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://socialadvisor.herokuapp.com/")
             .client(okhttp.build())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
         val service = retrofit.create(SocialAdviserApi::class.java)
 
         val call = service.getAllComercios()
+
+        val estado = service.getEstadoCita()
+
+        estado.enqueue(object : Callback<EstadoCitaResponse> {
+            override fun onResponse(
+                call: Call<EstadoCitaResponse>,
+                response: Response<EstadoCitaResponse>
+            ) {
+                val estados: EstadoCitaResponse? = response.body()
+
+                val est = estados?.results
+
+                estadoCita = est!![0]
+
+            }
+
+            override fun onFailure(call: Call<EstadoCitaResponse>, t: Throwable) {
+            }
+
+        })
 
         call.enqueue(object : Callback<ComercioResponse>{
             override fun onResponse(
@@ -66,19 +103,22 @@ class BussinesFragment : Fragment() {
 
                 val com = comercios?.results
 
-                val come = ArrayList<Comercios>()
+                val recyclerView = view.recycler_bussiness
 
-                if (com!= null){
-                    for(comercios in com){
-                        come.add(comercios)
+                adapter = object: RecyclerBusinessAdapter(view.context){
+                    override fun setClickListenerToSummary(holder: ViewBHolder, item: Comercios) {
+                        holder.itemView.setOnClickListener {
+                            val nextAction = BussinesFragmentDirections.actionToSummary(horario,item,cliente2, estadoCita)
+                            Navigation.findNavController(it).navigate(nextAction)
+                        }
                     }
+
                 }
 
+                adapter.changeDataSet(com!!)
 
-                recycler_bussiness.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = RecyclerBusinessAdapter(come)
-                }
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = LinearLayoutManager(view.context)
 
             }
 
@@ -86,14 +126,12 @@ class BussinesFragment : Fragment() {
             }
 
         })
-
-        view.floatingActionButtonSummary.setOnClickListener {
+       /* view.floatingActionButtonSummary.setOnClickListener {
                 this.findNavController().navigate(
                     BussinesFragmentDirections.actionToSummary()
                 )
 
-        }
-
+        } */
         return view
     }
 

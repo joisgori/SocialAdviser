@@ -7,12 +7,23 @@
     tools:context=".fragments_logic.BussinesFragment">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="NEGOCIOS"
+        android:textSize="40dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_bussiness"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="12dp" />
+        android:layout_height="600dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonSummary"

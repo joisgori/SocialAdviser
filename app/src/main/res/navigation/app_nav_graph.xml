@@ -22,6 +22,9 @@
         <action
             android:id="@+id/actionToNewBusiness"
             app:destination="@id/bussinesFragment" />
+        <argument
+            android:name="cliente"
+            app:argType="com.example.socialadviser.models.Cliente2" />
     </fragment>
     <fragment
         android:id="@+id/bussinesFragment"
@@ -31,6 +34,12 @@
         <action
             android:id="@+id/actionToSummary"
             app:destination="@id/summaryFragment" />
+        <argument
+            android:name="horario"
+            app:argType="com.example.socialadviser.models.Horario" />
+        <argument
+            android:name="cliente"
+            app:argType="com.example.socialadviser.models.Cliente2" />
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
@@ -40,6 +49,18 @@
         <action
             android:id="@+id/actionToMeetings"
             app:destination="@id/meetingFragment2" />
+        <argument
+            android:name="horario"
+            app:argType="com.example.socialadviser.models.Horario" />
+        <argument
+            android:name="comercio"
+            app:argType="com.example.socialadviser.models.Comercios" />
+        <argument
+            android:name="cliente"
+            app:argType="com.example.socialadviser.models.Cliente2" />
+        <argument
+            android:name="estado"
+            app:argType="com.example.socialadviser.models.IdEstadoCita" />
     </fragment>
 
 </navigation>

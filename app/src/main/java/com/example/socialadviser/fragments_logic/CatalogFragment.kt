@@ -1,107 +1,114 @@
 package com.example.socialadviser.fragments_logic
 
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.socialadviser.BuildConfig
 import com.example.socialadviser.R
-import kotlinx.android.synthetic.main.fragment_catalog.*
+import com.example.socialadviser.adapters.HorarioAdapter
+import com.example.socialadviser.interfaces.SocialAdviserApi
+import com.example.socialadviser.models.Cliente2
+import com.example.socialadviser.models.Horario
+import com.example.socialadviser.models.results.HorarioResponse
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_catalog.view.*
-import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.coroutines.delay
-import java.text.DateFormat
-import java.util.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
-class CatalogFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+class CatalogFragment : Fragment(){
 
-    //Para DatePicker
-    //var listener: DatePickerDialog.OnDateSetListener? = null
-    //var datepicker = datePicker_newMeet
-
-    var day = 0
-    var month = 0
-    var year = 0
-    var hour = 0
-    var minute = 0
-
-    var savedDay = 0
-    var savedMonth = 0
-    var savedYear = 0
-    var savedHour = 0
-    var savedMinute = 0
-
-    private fun getDateTimeCalendar(){
-        val cal = Calendar.getInstance()
-        day = cal.get(Calendar.DAY_OF_MONTH)
-        month = cal.get(Calendar.MONTH)
-        year = cal.get(Calendar.YEAR)
-        hour = cal.get(Calendar.HOUR)
-        minute = cal.get(Calendar.MINUTE)
-    }
+    lateinit var adapter: HorarioAdapter
+    lateinit var cliente2: Cliente2
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_catalog, container, false)
 
-        /*
-        button.isEnabled = false
-        button.isClickable = false
-         */
+        val logging = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
 
-        view.Button_next_form.isEnabled = false
+        arguments?.let {
+            val safeArgs =CatalogFragmentArgs.fromBundle(it)
 
-        view.Button_New_Meeting.setOnClickListener {
-            getDateTimeCalendar()
-            //Toast.makeText(requireContext(), "HOLAAAAa", Toast.LENGTH_SHORT).show()
-            DatePickerDialog(requireContext(), this, year, month, day).show()
+            Log.d("Cliente Si hay: ", safeArgs.cliente.toString())
 
+            cliente2 = safeArgs.cliente
         }
 
-        view.Button_Meet_Back.setOnClickListener{
-            //Lógica para regresar al recycler
-            this.findNavController().navigateUp()
-        }
+        val okhttp = OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS).apply {
+                if (BuildConfig.DEBUG) {
+                    addInterceptor(logging)
+                }
+            }
 
-        view.Button_next_form.setOnClickListener {
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://socialadvisor.herokuapp.com/")
+            .client(okhttp.build())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+
+        val service = retrofit.create(SocialAdviserApi::class.java)
+
+        val call = service.getAllHorarios()
+
+        call.enqueue(object: Callback<HorarioResponse> {
+            override fun onResponse(
+                call: Call<HorarioResponse>,
+                response: Response<HorarioResponse>
+            ) {
+                val horarios:HorarioResponse? = response.body()
+
+                val hor = horarios?.results
+
+                val recyclerView = view.recycler_catalog
+
+
+                adapter = object : HorarioAdapter(view.context){
+                    override fun setClickListenerToBusiness(holder: ViewHolder, item: Horario) {
+                        holder.itemView.setOnClickListener {
+                            val nextAction = CatalogFragmentDirections.actionToNewBusiness(item, cliente2)
+                            Navigation.findNavController(it).navigate(nextAction)
+                        }
+                    }
+
+                }
+
+                adapter.changeDataSet(hor!!)
+
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = LinearLayoutManager(view.context)
+            }
+
+            override fun onFailure(call: Call<HorarioResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        /*view.floatingActionButtonCatalog.setOnClickListener {
             this.findNavController().navigate(
                 CatalogFragmentDirections.actionToNewBusiness()
             )
-        }
-
+        }*/
 
         return view
-    }
-
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        savedDay = dayOfMonth
-        savedMonth = month
-        savedYear = year
-
-        getDateTimeCalendar()
-        TimePickerDialog(requireContext(), this, hour, minute, true).show()
-    }
-
-    @SuppressLint("setTextI18n")
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        savedHour = hourOfDay
-        savedMinute = minute
-
-        textView4.text = "$savedDay-$savedMonth-$savedYear\n Hour: $savedHour Minute: $savedMinute"
-
-        Button_next_form.isEnabled = true
-
     }
 }

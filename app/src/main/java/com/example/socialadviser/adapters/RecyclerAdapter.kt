@@ -5,15 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialadviser.R
-import com.example.socialadviser.models.Cita
+import com.example.socialadviser.models.Cita2
 import kotlinx.android.synthetic.main.card_meetings.view.*
 
-class RecyclerAdapter(private var citas:List<Cita>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
+class RecyclerAdapter(private var citas:List<Cita2>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
+
+    init {
+        changeDataSet(citas)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Cita) = with(itemView){
-            comercio.text = item.comercio?.nombre
-            hora.text = item.horario?.fecha_inicio
+        fun bind(item: Cita2) = with(itemView){
+            comercio.text = item.idComercio?.nombreComercio
+            hora.text = item.idHorario?.fechaInicio.toString()
         }
     }
 
@@ -33,7 +37,7 @@ class RecyclerAdapter(private var citas:List<Cita>) : RecyclerView.Adapter<Recyc
         return citas.size
     }
 
-    internal fun changeDataSet(newDataSet : List<Cita>){
+    internal fun changeDataSet(newDataSet : List<Cita2>){
         this.citas = newDataSet
         notifyDataSetChanged()
     }

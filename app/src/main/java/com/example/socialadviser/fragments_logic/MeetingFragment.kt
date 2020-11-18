@@ -1,29 +1,22 @@
 package com.example.socialadviser.fragments_logic
 
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.TimePicker
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.socialadviser.BuildConfig
 import com.example.socialadviser.R
 import com.example.socialadviser.adapters.RecyclerAdapter
 import com.example.socialadviser.interfaces.SocialAdviserApi
-import com.example.socialadviser.models.Cita
+import com.example.socialadviser.models.Cliente2
 import com.example.socialadviser.models.results.CitasResponse
-import kotlinx.android.synthetic.main.fragment_catalog.*
-import kotlinx.android.synthetic.main.fragment_catalog.view.*
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_meeting.*
 import kotlinx.android.synthetic.main.fragment_meeting.view.*
 import okhttp3.OkHttpClient
@@ -33,12 +26,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.time.Month
-import java.time.Year
-import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.collections.ArrayList
 
+lateinit var clienteF : Cliente2
 
 class MeetingFragment : Fragment(){
 
@@ -51,13 +41,6 @@ class MeetingFragment : Fragment(){
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_meeting, container, false)
 
-        view.floatingActionButtonNewMeet.setOnClickListener{
-            this.findNavController().navigate(
-                MeetingFragmentDirections.actionToNewMeet()
-
-            )
-
-        }
 
         val logging = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
 
@@ -69,58 +52,66 @@ class MeetingFragment : Fragment(){
                 }
             }
 
+        email = activity?.intent?.extras?.getString("mail")!!
+        pass = activity?.intent?.extras?.getString("contra")!!
+
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://socialadvisor.herokuapp.com/")
             .client(okhttp.build())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
         val service = retrofit.create(SocialAdviserApi::class.java)
 
         val call = service.getAllCitas()
 
+        val user = service.login(email, pass)
+
+        user.enqueue(object : Callback<Cliente2>{
+            override fun onResponse(call: Call<Cliente2>, response: Response<Cliente2>) {
+                if(response.code() == 200){
+                    clienteF = response.body()!!
+                    Toast.makeText(requireContext(), clienteF.nombreCliente, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Cliente2>, t: Throwable) {
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         call.enqueue(object : Callback<CitasResponse>{
             override fun onResponse(call: Call<CitasResponse>, response: Response<CitasResponse>) {
 
-                val citas:CitasResponse? = response.body()
+                val citas:CitasResponse?= response.body()
 
                 val cit = citas?.results
 
-                Log.d("Si hay", citas.toString())
-
-                val cita = ArrayList<Cita>()
-
-                if(cit!= null){
-                    for(citas in cit){
-                        cita.add(citas)
-                    }
-                }
-                if(cit!= null) {
-                    for (citas in cit) {
-                        Log.d("Se guarda", cit.toString())
-                    }
-                }
-                Log.d("Citas: ", cita.toString())
+                Log.d("Citas", cit.toString())
 
                 recycler_meetings.apply {
                     layoutManager = LinearLayoutManager(activity)
-                    adapter = RecyclerAdapter(cita)
+                    adapter = cit?.let {
+                        RecyclerAdapter(it)
+                    }
                 }
-
             }
 
             override fun onFailure(call: Call<CitasResponse>, t: Throwable) {
+                Log.d("Error", t.message.toString())
             }
 
         })
 
-        email = activity?.intent?.extras?.getString("mail")!!
-        pass = activity?.intent?.extras?.getString("contra")!!
-
-        //Toast.makeText(requireContext(), email, Toast.LENGTH_SHORT).show()
-
+        view.floatingActionButtonNewMeet.setOnClickListener{
+            val nextAction = MeetingFragmentDirections.actionToNewMeet(clienteF)
+            Navigation.findNavController(it).navigate(nextAction)
+        }
 
         return view
     }
+
 
 }

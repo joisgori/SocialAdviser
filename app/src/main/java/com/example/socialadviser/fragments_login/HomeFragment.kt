@@ -12,9 +12,10 @@ import com.example.socialadviser.AppLogic
 import com.example.socialadviser.R
 import com.example.socialadviser.interfaces.SocialAdviserApi
 import com.example.socialadviser.models.Cliente2
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,9 +42,12 @@ class HomeFragment : Fragment() {
         val intent = Intent(requireContext(), AppLogic::class.java)
 
         view.Button_Home_Login.setOnClickListener {
+
+            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://socialadvisor.herokuapp.com/")
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
 
             val service = retrofit.create(SocialAdviserApi::class.java)
@@ -58,7 +62,7 @@ class HomeFragment : Fragment() {
                 override fun onResponse(call: Call<Cliente2>, response: Response<Cliente2>) {
                     if(response.code() == 200){
                         intent.putExtra("mail", editTextTextEmailAddress.text.toString())
-                        intent.putExtra("contra", editTextTextEmailAddress.text.toString())
+                        intent.putExtra("contra", editTextTextPassword.text.toString())
                         startActivity(intent)
                     } else{
                         Toast.makeText(requireContext(), "Credenciales Invalidas", Toast.LENGTH_SHORT).show()

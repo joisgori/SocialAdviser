@@ -7,7 +7,7 @@
     android:layout_marginTop="12dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    android:id="@+id/card_bussiness"
+    android:id="@+id/card_catalog"
     card_view:cardBackgroundColor="#FFFF"
     card_view:cardCornerRadius="8dp"
     card_view:contentPadding="10dp"
@@ -24,14 +24,14 @@
 
 
             <TextView
-                android:id="@+id/textview_card_business_title"
+                android:id="@+id/horario_inicial"
                 android:layout_width="181dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="68dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="Título"
+                android:text="Hora"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="68dp" />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textview_card_business_description"
+                android:id="@+id/fecha_inicial"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="16dp"
@@ -51,11 +51,11 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="top"
-                android:text="Descripcion" />
+                android:text="Fecha" />
 
         </LinearLayout>
 
 
 
     </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
