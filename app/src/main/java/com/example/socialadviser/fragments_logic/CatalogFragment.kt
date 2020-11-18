@@ -103,12 +103,6 @@ class CatalogFragment : Fragment(){
 
         })
 
-        /*view.floatingActionButtonCatalog.setOnClickListener {
-            this.findNavController().navigate(
-                CatalogFragmentDirections.actionToNewBusiness()
-            )
-        }*/
-
         return view
     }
 }

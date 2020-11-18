@@ -73,7 +73,6 @@ class MeetingFragment : Fragment(){
             override fun onResponse(call: Call<Cliente2>, response: Response<Cliente2>) {
                 if(response.code() == 200){
                     clienteF = response.body()!!
-                    Toast.makeText(requireContext(), clienteF.nombreCliente, Toast.LENGTH_SHORT).show()
                 }
             }
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.socialadviser.R
 import com.example.socialadviser.models.Comercios
 import kotlinx.android.synthetic.main.card_bussiness.view.*
@@ -47,6 +48,7 @@ abstract class RecyclerBusinessAdapter internal constructor(context: Context) : 
 
     inner class ViewBHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind (item: Comercios) = with(itemView){
+            Glide.with(itemView).load(item.imagenComercio).into(business_image)
             textview_card_business_title.text = item.nombreComercio
             textview_card_business_description.text = item.descripcionComercio.toString()
         }

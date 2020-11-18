@@ -126,12 +126,7 @@ class BussinesFragment : Fragment() {
             }
 
         })
-       /* view.floatingActionButtonSummary.setOnClickListener {
-                this.findNavController().navigate(
-                    BussinesFragmentDirections.actionToSummary()
-                )
 
-        } */
         return view
     }
 
