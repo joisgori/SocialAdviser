@@ -1,9 +1,15 @@
 package com.example.socialadviser.models
 
-import com.squareup.moshi.Json
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TipoServicio(
-    //@field:Json(name="id_tipo_servicio") val id:Int?,
-    @field:Json(name="nombre_tipo_servicio") val nombre:String?,
-    @field:Json(name="duracion_servicio") val duracion:Float?
+    @Json(name = "id_tipo_servicio")
+    val idTipoServicio: Int?,
+    @Json(name = "nombre_tipo_servicio")
+    val nombreTipoServicio: String?,
+    @Json(name = "duracion_servicio")
+    val duracionServicio: Double?
 )

@@ -1,9 +1,15 @@
 package com.example.socialadviser.models
 
-import com.squareup.moshi.Json
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TipoCola(
-    @field:Json(name="id_tipo_cola") val id:Int?,
-    @field:Json(name="nombre_tipo_cola") val nombre:String?,
-    @field:Json(name="valor_tipo_cola") val tipo:Boolean?
+    @Json(name = "id_tipo_cola")
+    val idTipoCola: Int?,
+    @Json(name = "nombre_tipo_cola")
+    val nombreTipoCola: String?,
+    @Json(name = "valor_tipo_cola")
+    val valorTipoCola: Boolean?
 )

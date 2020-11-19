@@ -62,5 +62,10 @@
             android:name="estado"
             app:argType="com.example.socialadviser.models.IdEstadoCita" />
     </fragment>
+    <fragment
+        android:id="@+id/colaFragment"
+        android:name="com.example.socialadviser.fragments_logic.ColaFragment"
+        android:label="fragment_cola"
+        tools:layout="@layout/fragment_cola" />
 
 </navigation>
