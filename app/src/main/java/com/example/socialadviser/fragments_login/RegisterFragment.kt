@@ -124,6 +124,8 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
             }
 
+
+
         })
 
         view.Button_Accept_Register.setOnClickListener{
@@ -158,8 +160,9 @@ class RegisterFragment : Fragment() {
                 }
 
                 override fun onResponse(call: Call<ClienteResponse>, response: Response<ClienteResponse>) {
-                    Toast.makeText(requireContext(), "codigo malo: " + response.code(), Toast.LENGTH_SHORT).show()
                     if(response.code() == 201){
+                        intent.putExtra("mail",correo.text.toString())
+                        intent.putExtra("contra", contraseña.text.toString())
                         startActivity(intent)
                     }
                     else{
