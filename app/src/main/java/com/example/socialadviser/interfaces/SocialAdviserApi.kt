@@ -38,5 +38,21 @@ interface SocialAdviserApi {
     @GET("estadocita")
     fun getEstadoCita() : Call <EstadoCitaResponse>
 
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @GET("colas")
+    fun getAllColas() : Call <ColaResponse>
+
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @POST("ColaCliente/")
+    fun addColaCliente(@Body cola: ClienteCola) : Call<Any>
+
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @GET("ColaCliente")
+    fun getMisColas() : Call<ColaClienteResponse>
+
+
+
+
+
 
 }

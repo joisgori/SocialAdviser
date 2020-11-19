@@ -13,6 +13,8 @@ import com.example.socialadviser.BuildConfig
 import com.example.socialadviser.R
 import com.example.socialadviser.adapters.RecyclerAdapter
 import com.example.socialadviser.interfaces.SocialAdviserApi
+import com.example.socialadviser.models.Cita
+import com.example.socialadviser.models.Cita2
 import com.example.socialadviser.models.Cliente2
 import com.example.socialadviser.models.results.CitasResponse
 import com.squareup.moshi.Moshi
@@ -88,13 +90,22 @@ class MeetingFragment : Fragment(){
 
                 val cit = citas?.results
 
+                val siSoy = ArrayList<Cita2>()
+
+                if(cit != null){
+                    for(citas in cit){
+                        if(citas.idCliente?.correoelectronicoCliente == email){
+                            siSoy.add(citas)
+                        }
+                    }
+                }
+
+
                 Log.d("Citas", cit.toString())
 
                 recycler_meetings.apply {
                     layoutManager = LinearLayoutManager(activity)
-                    adapter = cit?.let {
-                        RecyclerAdapter(it)
-                    }
+                    adapter = RecyclerAdapter(siSoy)
                 }
             }
 

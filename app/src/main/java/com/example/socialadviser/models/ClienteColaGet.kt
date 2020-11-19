@@ -4,9 +4,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ClienteCola(
-    //@Json(name = "id_cola_cliente")
-    //val idCola: Int?,
+data class ClienteColaGet (
+    @Json(name = "id_cola_cliente")
+    val idCola: Int?,
     @Json(name = "cola")
     val cola:Cola?,
     @Json(name = "cliente")

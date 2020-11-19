@@ -10,4 +10,9 @@
         android:title="Colas"
         android:icon="@drawable/ic_action_cola"/>
 
+    <item
+        android:id="@+id/misColasFragment"
+        android:title="Mis Colas"
+        android:icon="@drawable/ic_action_mis_colas"/>
+
 </menu>
