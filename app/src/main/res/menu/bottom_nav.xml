@@ -15,4 +15,10 @@
         android:title="Mis Colas"
         android:icon="@drawable/ic_action_mis_colas"/>
 
+    <item
+        android:id="@+id/profileFragment"
+        android:title="Perfil"
+        android:icon="@drawable/ic_profile_icon"/>
+
+
 </menu>

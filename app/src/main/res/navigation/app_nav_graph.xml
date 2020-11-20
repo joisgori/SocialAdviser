@@ -91,5 +91,10 @@
         android:name="com.example.socialadviser.fragments_logic.MisColasFragment"
         android:label="fragment_mis_colas"
         tools:layout="@layout/fragment_mis_colas" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.socialadviser.fragments_logic.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
