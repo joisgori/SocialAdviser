@@ -11,26 +11,26 @@
         android:id="@+id/summary_hora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hora"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Hora" />
 
     <TextView
         android:id="@+id/summary_fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fecha"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Fecha" />
 
     <TextView
         android:id="@+id/summary_negocio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Negocio"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Negocio" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center">
 
         <Button
