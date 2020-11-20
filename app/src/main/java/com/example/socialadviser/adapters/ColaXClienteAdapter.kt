@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.socialadviser.R
 import com.example.socialadviser.models.ClienteColaGet
 import kotlinx.android.synthetic.main.card_mis_colas.view.*
@@ -16,6 +17,7 @@ class ColaXClienteAdapter (private var colaxCliente:List<ClienteColaGet>) : Recy
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ClienteColaGet) = with(itemView){
+            Glide.with(itemView).load(item.cola?.colaComercios?.imagenComercio).into(business_image)
             nombreCola.text = item.cola?.tipoCola?.nombreTipoCola
             servicio.text = item.cola?.tipoServicio?.nombreTipoServicio
         }

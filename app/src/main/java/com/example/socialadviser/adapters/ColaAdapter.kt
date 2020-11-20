@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.socialadviser.R
 import com.example.socialadviser.models.Cola
 import kotlinx.android.synthetic.main.card_cola.view.*
+import kotlinx.android.synthetic.main.card_meetings.view.*
 
 abstract class ColaAdapter internal constructor(context: Context) : RecyclerView.Adapter<ColaAdapter.ViewHolder>()
 {
@@ -42,6 +44,7 @@ abstract class ColaAdapter internal constructor(context: Context) : RecyclerView
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Cola) = with(itemView){
+            Glide.with(itemView).load(item.colaComercios?.imagenComercio).into(business_imagee)
             nombreComercio.text = item.colaComercios?.nombreComercio
             tiempoEsperado.text = item.tiempoEsperado.toString()
         }

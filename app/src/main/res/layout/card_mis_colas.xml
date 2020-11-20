@@ -10,7 +10,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_width="match_parent"
-    android:layout_height="96dp"
+    android:layout_height="wrap_content"
     android:foreground="?selectableItemBackground"
     android:clickable="true">
 
@@ -20,25 +20,31 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/business_image"
+                android:src="@drawable/ic_launcher_background" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/nombreCola"
                 android:layout_width="181dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="68dp"
+                android:layout_marginRight="68dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="Cola"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="68dp" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:text="Cola" />
 
             <TextView
                 android:id="@+id/servicio"
@@ -51,6 +57,8 @@
                 android:gravity="top"
                 android:text="Servicio" />
 
+
+        </LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>

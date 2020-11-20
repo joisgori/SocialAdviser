@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.socialadviser.R
 import com.example.socialadviser.models.Cita2
+import kotlinx.android.synthetic.main.card_bussiness.view.*
 import kotlinx.android.synthetic.main.card_meetings.view.*
+import kotlinx.android.synthetic.main.card_meetings.view.business_image
 
 class RecyclerAdapter(private var citas:List<Cita2>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
@@ -16,6 +19,7 @@ class RecyclerAdapter(private var citas:List<Cita2>) : RecyclerView.Adapter<Recy
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Cita2) = with(itemView){
+            Glide.with(itemView).load(item.idComercio?.imagenComercio).into(business_image)
             comercio.text = item.idComercio?.nombreComercio
             hora.text = item.idHorario?.fechaInicio.toString()
         }
