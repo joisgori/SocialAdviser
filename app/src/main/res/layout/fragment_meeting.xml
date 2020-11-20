@@ -6,17 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".fragments_logic.MeetingFragment">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_meetings"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:scrollbars="vertical"
-        tools:layout_editor_absoluteY="72dp"
-        tools:listitem="@layout/recycler_view_item_1">
+        android:orientation="vertical">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="Mis Citas"
+            app:titleTextColor="#FFFFFF"
+            android:backgroundTint="#2f3a8b"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_meetings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:scrollbars="vertical"
+
+            tools:listitem="@layout/recycler_view_item_1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonNewMeet"
@@ -27,10 +43,9 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="#FFFFFF" />
+        android:backgroundTint="#2f3a8b"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

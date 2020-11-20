@@ -7,51 +7,74 @@
     tools:context=".fragments_logic.ColaSummary">
 
 
-    <TextView
-        android:id="@+id/turno"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Turno"
-        android:gravity="center"/>
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true">
 
-    <TextView
-        android:id="@+id/tiempo_estimado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tiempo Estimado"
-        android:gravity="center"/>
-
-    <TextView
-        android:id="@+id/hora_Inicial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hora Inicial"
-        android:gravity="center"/>
-
-    <TextView
-        android:id="@+id/colaN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cola"
-        android:gravity="center"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/cancelar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cancelar" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/aceptar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aceptar" />
+            <TextView
+                android:id="@+id/tiempo_estimado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Tiempo Estimado"
+                />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/turno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Turno"
+
+                />
+
+            <TextView
+                android:id="@+id/colaN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Cola"/>
+
+            <TextView
+                android:id="@+id/hora_Inicial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Hora Inicial"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancelar"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Cancelar" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/aceptar"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aceptar" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
