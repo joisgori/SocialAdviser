@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments_logic.SummaryFragment"
-    tools:layout_editor_absoluteY="25dp">
-
+>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
@@ -23,69 +24,67 @@
             android:theme="?attr/actionBarTheme"
             app:title="Resumen Cita"
             app:titleTextColor="#FFF" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
 
         <ImageView
+            android:id="@+id/business_image"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/business_image"/>
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/summary_negocio"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="Negocio"
+            android:padding="10dp"
             android:textAlignment="center"
-            android:textSize="25dp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/summary_hora"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="Hora"
             android:textAlignment="center"
-            android:textSize="25dp" />
+            android:textSize="30sp"
+            android:padding="10dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/summary_fecha"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="Fecha"
             android:textAlignment="center"
-            android:textSize="25dp" />
+            android:textSize="30sp"
+            android:padding="10dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center">
 
             <Button
                 android:id="@+id/aceptar"
+                android:layout_gravity="center"
+                android:text="Aceptar"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Aceptar" />
+                android:layout_margin="16dp"
+      />
 
             <Button
                 android:id="@+id/cancelar"
+                android:layout_gravity="center"
+                android:text="Cancelar"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Cancelar" />
+                android:layout_margin="16dp"/>
 
         </LinearLayout>
 
