@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/loginscrn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="Registro"
+        android:layout_marginBottom="16dp"
         android:textSize="25dp"
         android:textStyle="bold"
         android:layout_gravity="center"/>
@@ -17,8 +19,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:layout_marginBottom="16dp"
         android:hint="Nombre"
-        android:ems="10"/>
+        android:ems="10"
+        android:padding="10dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/apellido"
@@ -26,19 +31,29 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:hint="Apellido"
-        android:ems="10" />
+        android:layout_marginBottom="16dp"
+
+        android:ems="10"
+        android:padding="10dp"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:hint="Correo"
-        android:ems="10" />
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:padding="10dp"
+        android:textStyle="bold"/>
     <Spinner
         android:id="@+id/municipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp">
+        android:layout_marginLeft="100dp"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold">
 
     </Spinner>
     <EditText
@@ -48,24 +63,67 @@
         android:layout_marginLeft="100dp"
         android:inputType="textPassword"
         android:hint="Contraseña"
-        android:ems="10" />
+        android:ems="10"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/numero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:hint="Numero"
-        android:ems="10" />
-    <Button
-        android:id="@+id/Button_Accept_Register"
-        android:layout_width="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="Registrarse" />
-    <Button
-        android:id="@+id/Button_Cancel_Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="Cancelar" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/Button_Accept_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/button_rounded"
+            android:backgroundTint="@color/design_default_color_primary_dark"
+            android:fontFamily="sans-serif-light"
+            android:padding="15dp"
+            android:layout_marginBottom="16dp"
+            android:text="Registrarse"
+            android:textColor="@color/primaryTextColor"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.697" />
+
+        <Button
+            android:id="@+id/Button_Cancel_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_rounded"
+            android:backgroundTint="@color/design_default_color_primary_dark"
+            android:fontFamily="sans-serif-light"
+            android:padding="15dp"
+            android:text="Cancelar"
+            android:textColor="@color/primaryTextColor"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.697" />
+    </LinearLayout>
+
 </LinearLayout>

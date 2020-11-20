@@ -29,8 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="10dp"
             android:text="Tiempo Estimado"
+            android:padding="10dp"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -66,7 +66,7 @@
 
         <LinearLayout
             android:id="@+id/cardView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
@@ -77,21 +77,44 @@
             android:gravity="center">
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cancelar"
-                android:text="Cancelar"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"/>
-
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/aceptar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/design_default_color_primary_dark"
+                android:fontFamily="sans-serif-light"
+                android:padding="15dp"
                 android:text="Aceptar"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="@android:integer/config_longAnimTime"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.697"
+                />
+
+            <Button
+                android:id="@+id/cancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/design_default_color_primary_dark"
+                android:fontFamily="sans-serif-light"
+                android:padding="15dp"
+                android:text="Cancelar"
+                android:layout_margin="16dp"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="@android:integer/config_longAnimTime"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.697" />
 
 
         </LinearLayout>
